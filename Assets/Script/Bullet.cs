@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour
             Instantiate(ExplosionParticle, gameObject.transform.position, gameObject.transform.rotation);
                //Destroy(gameObject);
         }         
-        if (other.gameObject.tag == "Wall")
+        if (other.gameObject.tag == "Enemy")
         {
             Destroy(gameObject);
         }
