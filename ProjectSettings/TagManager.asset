@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Ground
   - WorldObjectHolder
+  - Wall
+  - Enemy
+  - Bullet
   layers:
   - Default
   - TransparentFX

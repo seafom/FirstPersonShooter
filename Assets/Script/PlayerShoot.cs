@@ -9,32 +9,34 @@ public class PlayerShoot : MonoBehaviour
     public float fireRate, bulletDamage;
     public bool isAuto;
 
+    public Animator animator;
+
     [Header("Initial Setup")]
     public Transform bulletSpawnTransform;
     public GameObject bulletPrefab;
+    [SerializeField] GameObject SmokeParticle;
 
-    private float timer;
+
+    private void Start()
+    {
+
+    }
 
     private void Update()
     {
-        if (timer > 0)
-        {
-            timer -= Time.deltaTime / fireRate;
-        }
-        if (isAuto)
-        {
             if (Input.GetButton("Fire1"))
             {
+                animator.SetTrigger("GetButtonDown");
                 Shoot();
+                Instantiate(SmokeParticle, bulletSpawnTransform.position, bulletSpawnTransform.rotation);
+                
+                //Camera shake
             }
-        }
-        else
-        {
-            if (Input.GetButtonDown("Fire1") && timer <= 0)
+            if (Input.GetButtonUp("Fire1"))
             {
-                Shoot();
+                animator.SetTrigger("GetButtonUp");
             }
-        }
+       
     }
 
     void Shoot()
@@ -42,7 +44,12 @@ public class PlayerShoot : MonoBehaviour
         // Replace in the inspector the bullet by bubbles
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawnTransform.position, bulletSpawnTransform.rotation);
         bullet.GetComponent<Rigidbody>().velocity = (bulletSpawnTransform.forward * bulletSpeed);
-        timer = 1;
     }
+
+
+
+
+
+
 
 }

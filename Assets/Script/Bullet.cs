@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float damage;
-    public float lifeTime;
+
+    [SerializeField] GameObject ExplosionParticle;
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag != "Player")
+        {
+            Instantiate(ExplosionParticle, gameObject.transform.position, gameObject.transform.rotation);
+               //Destroy(gameObject);
+        }         
+        if (other.gameObject.tag == "Wall")
+        {
+            Destroy(gameObject);
+        }
+    }
 }
