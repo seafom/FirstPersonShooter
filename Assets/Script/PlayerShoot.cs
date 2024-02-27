@@ -14,11 +14,10 @@ public class PlayerShoot : MonoBehaviour
     [Header("Initial Setup")]
     public Transform bulletSpawnTransform;
     public GameObject bulletPrefab;
+
     [SerializeField] GameObject SmokeParticle;
     [SerializeField] GameObject BubblepopParticle;
     
-
-
     [SerializeField] CameraShake shake;
     [SerializeField] private float _damage;
 

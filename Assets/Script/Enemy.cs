@@ -1,4 +1,3 @@
-using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -28,10 +27,9 @@ public class Enemy : MonoBehaviour
             if (currentHealth <= 0)
             {
                 Instantiate(explosionPrefab, transform.position, transform.rotation);
-                ShowFloatingText();
                 Destroy(gameObject);
                 // Update score when enemy is destroyed
-                ScoreManager.instance.UpdateScore(1); 
+                ScoreManager.instance.UpdateScore(1);
             }
         }
     }
@@ -43,6 +41,7 @@ public class Enemy : MonoBehaviour
 
     void ShowFloatingText()
     {
-        Instantiate(floatingTextPrefab, transform.position, transform.rotation);
+        Instantiate(floatingTextPrefab, transform.localPosition, transform.rotation);
+        Destroy(gameObject, 1f); // Destroy the enemy object after 1 second (adjust as needed)
     }
 }
