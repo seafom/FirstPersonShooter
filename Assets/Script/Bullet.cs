@@ -1,20 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    [SerializeField] GameObject explosionParticle;
+    [SerializeField] float _damage = 10f;
 
-    [SerializeField] GameObject ExplosionParticle;
+    public float GetDamage()
+    {
+        return _damage;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag != "Player")
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            Instantiate(ExplosionParticle, gameObject.transform.position, gameObject.transform.rotation);
-               //Destroy(gameObject);
-        }         
-        if (other.gameObject.tag == "Enemy")
+            Instantiate(explosionParticle, transform.position, transform.rotation);
+            Destroy(gameObject);
+        }
+        else if (!other.gameObject.CompareTag("Player")) // Avoid destroying the bullet when colliding with the player
         {
+            Instantiate(explosionParticle, transform.position, transform.rotation);
             Destroy(gameObject);
         }
     }
