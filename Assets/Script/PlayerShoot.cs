@@ -17,6 +17,9 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] GameObject SmokeParticle;
 
 
+    [SerializeField] CameraShake shake;
+    [SerializeField] private float _damage;
+
     private void Start()
     {
 
@@ -28,15 +31,12 @@ public class PlayerShoot : MonoBehaviour
             {
                 animator.SetTrigger("GetButtonDown");
                 Shoot();
-                Instantiate(SmokeParticle, bulletSpawnTransform.position, bulletSpawnTransform.rotation);
-                
-                //Camera shake
+                Instantiate(SmokeParticle, bulletSpawnTransform.position, bulletSpawnTransform.rotation); 
             }
             if (Input.GetButtonUp("Fire1"))
             {
                 animator.SetTrigger("GetButtonUp");
             }
-       
     }
 
     void Shoot()
@@ -44,6 +44,7 @@ public class PlayerShoot : MonoBehaviour
         // Replace in the inspector the bullet by bubbles
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawnTransform.position, bulletSpawnTransform.rotation);
         bullet.GetComponent<Rigidbody>().velocity = (bulletSpawnTransform.forward * bulletSpeed);
+        shake.StartCoroutine(shake.Shake(0.1f, 0.1f));
     }
 
 
