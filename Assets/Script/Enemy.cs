@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+
         currentHealth = initialHealth;
     }
 
@@ -39,9 +40,12 @@ public class Enemy : MonoBehaviour
         currentHealth -= damage;
     }
 
+
+   
     void ShowFloatingText()
     {
-        Instantiate(floatingTextPrefab, transform.localPosition, transform.rotation);
-        Destroy(gameObject, 1f); // Destroy the enemy object after 1 second (adjust as needed)
+
+        var damage = Instantiate(floatingTextPrefab, transform.position, transform.rotation);
+        Destroy(damage, 1f); // Destroy the enemy object after 1 second (adjust as needed)
     }
 }
