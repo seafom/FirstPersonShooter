@@ -15,6 +15,8 @@ public class PlayerShoot : MonoBehaviour
     public Transform bulletSpawnTransform;
     public GameObject bulletPrefab;
     [SerializeField] GameObject SmokeParticle;
+    [SerializeField] GameObject BubblepopParticle;
+    
 
 
     [SerializeField] CameraShake shake;
@@ -31,12 +33,14 @@ public class PlayerShoot : MonoBehaviour
             {
                 animator.SetTrigger("GetButtonDown");
                 Shoot();
-                Instantiate(SmokeParticle, bulletSpawnTransform.position, bulletSpawnTransform.rotation); 
+                Instantiate(SmokeParticle, bulletSpawnTransform.position, bulletSpawnTransform.rotation);
+                Instantiate(BubblepopParticle, bulletSpawnTransform.position, bulletSpawnTransform.rotation);
+
             }
-            if (Input.GetButtonUp("Fire1"))
-            {
+        if (Input.GetButtonUp("Fire1"))
+        {
                 animator.SetTrigger("GetButtonUp");
-            }
+        }
     }
 
     void Shoot()
