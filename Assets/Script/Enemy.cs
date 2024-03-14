@@ -5,12 +5,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] GameObject explosionPrefab;
     [SerializeField] float initialHealth = 100f;
     [SerializeField] GameObject floatingTextPrefab;
+    [SerializeField] private Transform pfEnemyBroken;
 
     private float currentHealth;
+    private int hitsTaken = 0; // Track the number of hits taken
 
     private void Start()
     {
-
         currentHealth = initialHealth;
     }
 
@@ -23,14 +24,11 @@ public class Enemy : MonoBehaviour
             {
                 ApplyDamage(bullet.GetDamage());
                 ShowFloatingText();
-            }
 
-            if (currentHealth <= 0)
-            {
-                Instantiate(explosionPrefab, transform.position, transform.rotation);
-                Destroy(gameObject);
-                // Update score when enemy is destroyed
-                ScoreManager.instance.UpdateScore(1);
+                if (currentHealth <= 0)
+                {
+                    DestroyEnemy();
+                }
             }
         }
     }
@@ -40,12 +38,27 @@ public class Enemy : MonoBehaviour
         currentHealth -= damage;
     }
 
-
-   
     void ShowFloatingText()
     {
+        var damage = Instantiate(floatingTextPrefab, transform.position, Quaternion.identity);
+        Destroy(damage, 1f); // Destroy the floating text after 1 second
+    }
 
-        var damage = Instantiate(floatingTextPrefab, transform.position, transform.rotation);
-        Destroy(damage, 1f); // Destroy the enemy object after 1 second (adjust as needed)
+    void DestroyEnemy()
+    {
+        hitsTaken++; // Increment hits taken
+        if (hitsTaken >= 3) // Check if the enemy has been hit 3 times
+        {
+            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            Instantiate(pfEnemyBroken, transform.position, Quaternion.identity);
+            // Update score when enemy is destroyed
+            ScoreManager.instance.UpdateScore(1);
+            Destroy(gameObject); // Destroy the enemy object
+        }
+        else
+        {
+            // Reset health for next hit
+            currentHealth = initialHealth;
+        }
     }
 }
