@@ -149,7 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 3123075737211501182, guid: a3f72d5f213bb7d458dfc2c4369e7acf, type: 3}
   initialHealth: 100
-  floatingTextPrefab: {fileID: 0}
+  floatingTextPrefab: {fileID: 7034757972946567021, guid: a8e669a9f7515244f9e5dd6a5b027a53, type: 3}
   pfEnemyBroken: {fileID: 7053532961280755124, guid: 322a7d94ed34cfb42a99d3768980526e, type: 3}
 --- !u!114 &3472644342902272197
 MonoBehaviour:
